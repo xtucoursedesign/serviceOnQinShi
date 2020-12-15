@@ -1,6 +1,10 @@
 package org.bean;
 
-public class Factory {
+import java.io.Serializable;
+
+public class Factory implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private String bfid;
 	private String name;
 	public Factory() {

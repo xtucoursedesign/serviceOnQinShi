@@ -42,7 +42,8 @@ public class BaseDao<T> {
 		try {
 			len = qr.update(conn, sql, params);
 		} catch (SQLException e) {
-			throw new RuntimeException();
+			e.printStackTrace();
+//			throw new RuntimeException();
 		}
 		
 		return len;
@@ -67,7 +68,7 @@ public class BaseDao<T> {
 		try {
 			list = qr.query(conn, sql, new BeanListHandler<T>(type, processor), params);
 		} catch (SQLException e) {
-			throw new RuntimeException();
+			e.printStackTrace();
 		}
 		
 		return list;
@@ -77,7 +78,7 @@ public class BaseDao<T> {
 		Object o = null;
 		Connection conn = JDBCUtils.getConnection();
 		try {
-			qr.query(conn, sql, new ScalarHandler<T>(), params);
+			o = qr.query(conn, sql, new ScalarHandler<T>(), params);
 		} catch (SQLException e) {
 			throw new RuntimeException();
 		}
@@ -90,7 +91,7 @@ public class BaseDao<T> {
 		Connection conn = JDBCUtils.getConnection();
 		
 		try {
-			qr.query(conn, sql, new MapHandler(), params);
+			map = qr.query(conn, sql, new MapHandler(), params);
 		} catch (SQLException e) {
 			throw new RuntimeException();
 		}

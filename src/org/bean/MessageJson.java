@@ -1,6 +1,10 @@
 package org.bean;
 
-public class MessageJson {
+import java.io.Serializable;
+
+public class MessageJson implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private int status;
 	private String msg;
 	public MessageJson(int status, String msg) {

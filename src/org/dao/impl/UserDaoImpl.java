@@ -32,8 +32,8 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
 
 	@Override
 	public List<User> getAllUser() {
-		String sql = "SELECT * FROM pro_manage.users";
-		return this.getBeanList(sql);
+		String sql = "SELECT * FROM pro_manage.users WHERE username != ?";
+		return this.getBeanList(sql, "admin");
 	}
 
 	@Override

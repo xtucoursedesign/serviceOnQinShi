@@ -62,7 +62,7 @@ public class UserServlet extends BaseServlet {
 			map.put("users", list);
 			response.getWriter().write(gson.toJson(new DataJson(0, map)));
 		}else {
-			response.getWriter().write(gson.toJson(new MessageJson(1, "暂无数据!")));
+			response.getWriter().write(gson.toJson(new MessageJson(2, "暂无数据!")));
 		}
 	}
 	

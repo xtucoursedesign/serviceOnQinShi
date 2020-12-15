@@ -1,8 +1,11 @@
 package org.bean;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class DataJson {
+public class DataJson implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private int status;
 	private Map<String,?> data;
 	public DataJson(int status, Map<String,?> map) {
