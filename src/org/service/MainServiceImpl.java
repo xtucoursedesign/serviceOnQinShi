@@ -1,5 +1,7 @@
 package org.service;
 
+import java.util.List;
+
 import org.bean.Main;
 import org.bean.Page;
 import org.dao.MainDao;
@@ -21,7 +23,7 @@ public class MainServiceImpl implements MainService {
 
 	@Override
 	public boolean removeMain(String mid) {
-		return mainDao.removeMain(mid) > 0 ? true : false;
+		return mainDao.removeMain(mid) > 0;
 	}
 
 	@Override
@@ -42,6 +44,11 @@ public class MainServiceImpl implements MainService {
 		Page<Main> p = new Page<>();
 		p.setCurrent(page);
 		return mainDao.getMainBySearch(p, searchType, searchKeyWord);
+	}
+
+	@Override
+	public List<Main> getAllMain() {
+		return mainDao.getAllMain();
 	}
 
 }

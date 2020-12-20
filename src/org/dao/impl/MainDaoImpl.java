@@ -1,5 +1,7 @@
 package org.dao.impl;
 
+import java.util.List;
+
 import org.bean.Main;
 import org.bean.Page;
 import org.dao.BaseDao;
@@ -38,7 +40,7 @@ public class MainDaoImpl extends BaseDao<Main> implements MainDao{
 	@Override
 	public int updateMain(Main m, String oldMid) {
 		Main main = getMain(m.getMid());
-		if(main != null && m.getMid() != oldMid) {
+		if(main != null && !m.getMid().equals(oldMid)) {
 			return -1;
 		}
 		/**
@@ -61,7 +63,7 @@ public class MainDaoImpl extends BaseDao<Main> implements MainDao{
 		p.setTotalCount(count);
 		int totalPage = count % p.getPageSize() == 0 ? count / p.getPageSize() : count / p.getPageSize() + 1;
 		p.setTotalPage(totalPage);
-		String sqll = "SELECT * FROM pro_manage.main_stru ORDER BY `mid` DESC LIMIT ?,?";
+		String sqll = "SELECT * FROM pro_manage.main_stru ORDER BY num DESC LIMIT ?,?";
 		int pNo = p.getCurrent();
 		if(pNo < 1) {
 			pNo = 1;
@@ -95,6 +97,12 @@ public class MainDaoImpl extends BaseDao<Main> implements MainDao{
 		}
 		p.setList(this.getBeanList(sqll, searchKeyWord, (pNo - 1) * p.getPageSize(), p.getPageSize()));
 		return p;
+	}
+
+	@Override
+	public List<Main> getAllMain() {
+		String sql = "SELECT * FROM pro_manage.main_stru";
+		return this.getBeanList(sql);
 	}
 
 }

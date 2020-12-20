@@ -12,6 +12,7 @@
 		<input type="file" name="file" />
 		<input type="submit" value="上传" />
 	</form>
+	<a href="http://localhost:8080/xtuproject/PartServlet?method=exportAllPart">导出</a>
 
 </body>
 </html>

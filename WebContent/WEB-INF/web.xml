@@ -107,4 +107,44 @@
     <servlet-name>MainServlet</servlet-name>
     <url-pattern>/MainServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProjectServlet</display-name>
+    <servlet-name>ProjectServlet</servlet-name>
+    <servlet-class>org.servlet.ProjectServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProjectServlet</servlet-name>
+    <url-pattern>/ProjectServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LayoffServlet</display-name>
+    <servlet-name>LayoffServlet</servlet-name>
+    <servlet-class>org.servlet.LayoffServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LayoffServlet</servlet-name>
+    <url-pattern>/LayoffServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AssemblyServlet</display-name>
+    <servlet-name>AssemblyServlet</servlet-name>
+    <servlet-class>org.servlet.AssemblyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AssemblyServlet</servlet-name>
+    <url-pattern>/AssemblyServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PreassemblyServlet</display-name>
+    <servlet-name>PreassemblyServlet</servlet-name>
+    <servlet-class>org.servlet.PreassemblyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PreassemblyServlet</servlet-name>
+    <url-pattern>/PreassemblyServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

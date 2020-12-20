@@ -26,7 +26,7 @@ public class FactoryDaoImpl extends BaseDao<Factory> implements FactoryDao {
 
 	@Override
 	public List<Factory> getAllFactory() {
-		String sql = "SELECT * FROM pro_manage.branch_factory";
+		String sql = "SELECT * FROM pro_manage.branch_factory ORDER BY num ASC";
 		return this.getBeanList(sql);
 	}
 

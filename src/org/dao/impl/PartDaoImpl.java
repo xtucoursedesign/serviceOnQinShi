@@ -65,7 +65,7 @@ public class PartDaoImpl extends BaseDao<Part> implements PartDao {
 		page.setTotalCount(count);
 		int totalPage = count % page.getPageSize() == 0 ? count / page.getPageSize() : count / page.getPageSize() + 1;
 		page.setTotalPage(totalPage);
-		String sqll = "SELECT * FROM pro_manage.part ORDER BY pid DESC LIMIT ?,?";
+		String sqll = "SELECT * FROM pro_manage.part ORDER BY num DESC LIMIT ?,?";
 		int pNo = page.getCurrent();
 		if(pNo < 1) {
 			pNo = 1;

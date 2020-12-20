@@ -1,6 +1,7 @@
 package org.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRichTextString;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.bean.DataJson;
 import org.bean.Main;
 import org.bean.MessageJson;
@@ -127,6 +136,71 @@ public class MainServlet extends BaseServlet {
 		}else {
 			response.getWriter().write(gson.toJson(new MessageJson(1, "修改失败!")));
 		}
+	}
+	
+	protected void getAllMain(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Main> list = mainService.getAllMain();
+		if(list.size() != 0) {
+			Map<String, List<Main>> map = new HashMap<>();
+			map.put("main", list);
+			response.getWriter().write(gson.toJson(new DataJson(0, map)));
+		}else {
+			response.getWriter().write(gson.toJson(new MessageJson(2, "暂无数据!")));
+		}
+	}
+	
+	protected void exportAllMain(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String header[] = {"主钢构编号", "主钢构名字", "主钢构材料", "主钢构规格", "主钢构材质", "主钢构重量"};
+		List<Main> list = mainService.getAllMain();
+		@SuppressWarnings("resource")
+		HSSFWorkbook workbook = new HSSFWorkbook();//创建Excel文件(Workbook)
+		HSSFSheet sheet = workbook.createSheet();//创建工作表(Sheet)
+		// 设置列宽
+        sheet.setDefaultColumnWidth((short) 18);
+        // 设置表头样式
+        HSSFCellStyle styleTitle = workbook.createCellStyle();
+        // 设置前景色
+        styleTitle.setFillForegroundColor(IndexedColors.GREEN.getIndex());
+        // 设置背景色
+        styleTitle.setFillBackgroundColor(IndexedColors.GREEN.getIndex());
+        // 填充模式
+        styleTitle.setFillPattern(FillPatternType.LEAST_DOTS);
+        // 创建表头对象
+        HSSFRow row = sheet.createRow(0);
+        for(int i = 0; i < header.length; i++) {
+        	// 创建单元格对象
+        	HSSFCell cell = row.createCell(i);
+        	// 将文本内容转换为富文本信息
+        	HSSFRichTextString text = new HSSFRichTextString(header[i]);
+        	// 单元格赋值
+        	cell.setCellValue(text);
+        	cell.setCellStyle(styleTitle);
+        }
+//        System.out.println(list);
+        for(int i = 0; i < list.size(); i++) {
+        	Main sm = list.get(i);
+        	List<String> modal = new ArrayList<>();
+        	modal.add(sm.getMid());
+        	modal.add(sm.getName());
+        	modal.add(sm.getMaterial());
+        	modal.add(sm.getSpecifi());
+        	modal.add(sm.getTexture());
+        	modal.add(sm.getWeight() + sm.getUnit());
+        	
+        	//从第二行开始填充数据
+            row = sheet.createRow(i+1);
+            for(int j = 0; j < modal.size(); j++) {
+            	// 创建单元格对象
+            	HSSFCell cell = row.createCell(j);
+            	// 将文本内容转换为富文本信息
+            	HSSFRichTextString text = new HSSFRichTextString(modal.get(j));
+            	// 单元格赋值
+            	cell.setCellValue(text);
+            }
+        }
+        response.setHeader("Content-disposition", "attachment;filename="+"Main.xls");//Excel文件名
+        // 将文件写入输出流
+        workbook.write(response.getOutputStream());
 	}
 
 }

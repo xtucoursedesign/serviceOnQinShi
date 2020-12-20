@@ -29,7 +29,7 @@ public class PartServiceImpl implements PartService {
 	@Override
 	public boolean removePart(String pid) {
 		int len = partDao.removePart(pid);
-		return len > 0 ? true : false;
+		return len > 0;
 	}
 
 	@Override

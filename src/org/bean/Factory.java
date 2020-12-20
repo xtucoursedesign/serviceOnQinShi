@@ -27,6 +27,9 @@ public class Factory implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	@Override
 	public String toString() {
 		return "Factory [bfid=" + bfid + ", name=" + name + "]";

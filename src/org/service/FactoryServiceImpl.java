@@ -27,7 +27,7 @@ public class FactoryServiceImpl implements FactoryService {
 	@Override
 	public boolean removeFactory(String bfid) {
 		int len = factoryDao.removeFactory(bfid);
-		return len > 0 ? true : false;
+		return len > 0;
 	}
 
 	@Override

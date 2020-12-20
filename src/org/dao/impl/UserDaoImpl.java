@@ -32,7 +32,7 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
 
 	@Override
 	public List<User> getAllUser() {
-		String sql = "SELECT * FROM pro_manage.users WHERE username != ?";
+		String sql = "SELECT * FROM pro_manage.users WHERE username != ? ORDER BY num ASC";
 		return this.getBeanList(sql, "admin");
 	}
 

@@ -18,18 +18,18 @@ public class CheckLoginFilter extends HttpFilter implements Filter {
 	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		chain.doFilter(request, response);
-//		String method = request.getParameter("method");
-//		String token = request.getParameter("token");
-//		String sessionToken = (String)request.getSession().getAttribute("token");
-////		System.out.println("sessionToken=" + sessionToken + " token=" + token);
-//		if("login".equals(method)) {
-//			chain.doFilter(request, response);
-//		}else if(token != null && token.equals(sessionToken)) {
-//			chain.doFilter(request, response);
-//		}else {
-//			Gson gson = new Gson();
-//			response.getWriter().write(gson.toJson(new ErrorJson(401, "请重新登录!")));
-//		}
+		String method = request.getParameter("method");
+		String token = request.getParameter("token");
+		String sessionToken = (String)request.getSession().getAttribute("token");
+//		System.out.println("sessionToken=" + sessionToken + " token=" + token);
+		if("login".equals(method)) {
+			chain.doFilter(request, response);
+		}else if(token != null && token.equals(sessionToken)) {
+			chain.doFilter(request, response);
+		}else {
+			Gson gson = new Gson();
+			response.getWriter().write(gson.toJson(new MessageJson(401, "请重新登录!")));
+		}
 	}
 
 }
